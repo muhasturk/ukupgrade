@@ -1,13 +1,13 @@
 #!/bin/sh
 
-# "kernupgrade": *buntu kernel upgrade script
+# "ukupgrade": ubuntu kernel upgrade script
 # In order to start upgrade proccess give the file executable permission with the following command;
-# chmod +x ./kernupgrade
+# chmod +x ./ukupgrade.sh
 # 
 # In order to touch
-# Mustafa Hasturk
+# @author Mustafa Hasturk
 # @mail hello@mustafahasturk.com
-# @link http://github.com/muhasturk
+# @link https://github.com/muhasturk/ukupgrade
 
 new_kernel_version='3.16.1'
 new_kernel_release='3.16.1-031601-generic'
@@ -18,7 +18,7 @@ linux_image_i386="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.1-utopic/l
 linux_headers_amd64="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.1-utopic/linux-headers-3.16.1-031601-generic_3.16.1-031601.201408140014_amd64.deb"
 linux_image_amd64="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.1-utopic/linux-image-3.16.1-031601-generic_3.16.1-031601.201408140014_amd64.deb"
 
-old_kernel_release=`uname -a`  #check twice!
+old_kernel_release=`uname -r`
 kernel_directory="/tmp/new_kernel.d"
 
 lsb_infos="
@@ -34,7 +34,7 @@ echo "Checking new kernel available..."
 sleep 0.5
 
 
-if [ ${old_kernel_release} = ${new_kernel_release} ]; then
+if [ "${old_kernel_release}"  =  "${new_kernel_release}" ]; then
 
 echo "$old_kernel_release is already latest version.\nExit..."
 exit
@@ -46,13 +46,6 @@ Architecture: $architecture
 oldKernel: $old_kernel_release 
 $(tput sgr0)"
 
-#tr_TR_string="Will be upgrade"
-#if [ $sys_language = en_US ]; then
-#echo "$en_US_string"
-#else
-#echo "tr_TR_string"
-#fi
-
 echo "$en_US_string"
 sleep 0.5
 
@@ -60,14 +53,15 @@ read -p "Press Enter to continue, or abort by pressing CTRL+C" nothing
 
 if  [ ${architecture} = 'i686' ] || [ ${architecture} = 'i386' ]; then
 echo "i386 process started"
-sleep 0.5
 mkdir -p ${kernel_directory}
-echo "kernel_directory created"
+echo "kernel_directory created on ${kernel_directory}\n"
 cd ${kernel_directory}
 
 wget -c ${common_headers}
 wget -c ${linux_headers_i386}
 wget -c ${linux_image_i386}
+echo "download files completed"
+
 sudo dpkg -i *.deb
 
 echo ".deb packages have been installed"t
@@ -75,12 +69,13 @@ echo ".deb packages have been installed"t
 elif [ ${architecture} = "x86_64" ]; then
 echo "amd64 process started"
 mkdir -p ${kernel_directory}
-echo "removed new_kernel.d directory and kernel images"
+echo "kernel_directory created on ${kernel_directory}\n"
 cd ${kernel_directory}
 
 wget -c ${common_headers}
 wget -c ${linux_headers_amd64}
 wget -c ${linux_image_amd64}
+echo "download files completed"
 sudo dpkg -i *.deb
 echo ".deb packages have been installed"
 
