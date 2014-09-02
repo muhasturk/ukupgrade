@@ -1,7 +1,7 @@
 ukupgrade
 =========
 
-**ukupgrade** stands for "*Ubuntu Kernel Upgrade*"
+**ukupgrade** stands for "*Ubuntu Kernel Upgrade*"   
 **Purpose**: It provides us to upgrade linux kernel to latest stable version for Ubuntu/Mint and derivatives. Based on [this archive](http://kernel.ubuntu.com/~kernel-ppa/mainline/)
 
 ## Usage
@@ -17,6 +17,6 @@ sudo ./ukupgrade
 ```
 
 ###Author
-[Mustafa Hasturk](https://www.linkedin.com/in/muhasturk) 
-*homepage*: [mustafahasturk.com](http://mustafahasturk.com)
+[Mustafa Hasturk](https://www.linkedin.com/in/muhasturk)   
+*homepage*: [mustafahasturk.com](http://mustafahasturk.com)   
 *email*: hello@mustafahasturk.com

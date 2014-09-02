@@ -33,9 +33,7 @@ echo "provide us root privilege when asked"
 echo "Checking new kernel available..."
 sleep 0.5
 
-
 if [ "${old_kernel_release}"  =  "${new_kernel_release}" ]; then
-
 echo "$old_kernel_release is already latest version.\nExit..."
 exit
 fi
@@ -83,6 +81,6 @@ else
 	echo "Unsupported architecture"
 fi
 
-echo "Kernel $new_kernel_version has been installed successfully.
-We have to restart system"
+echo "Kernel $new_kernel_version has been installed successfully\n
+We have to reboot system"
 sudo reboot
