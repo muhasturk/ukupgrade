@@ -31,7 +31,7 @@ sudo cp ./ukupgrade /usr/bin/do-kernel-upgrade
 ```
 * Now you can call the script whereever you are
 ```
-do-release-upgrade
+do-kernel-upgrade
 ```
 
 ###Author
