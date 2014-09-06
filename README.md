@@ -1,11 +1,12 @@
 ukupgrade
 =========
 
-<img align="right" height="300" src="https://www.kernel.org/theme/images/logos/tux.png" alt="Linux Logo" title="Tux">
+<img align="right" src="https://www.kernel.org/theme/images/logos/tux.png" alt="Linux Logo" title="Tux">
 
 **ukupgrade** stands for "*Ubuntu Kernel Upgrade*"   
 
 **Purpose**: It provides us to upgrade linux kernel to latest stable version for Ubuntu/Mint and derivatives. Based on [this archive](http://kernel.ubuntu.com/~kernel-ppa/mainline/)
+
 
 **Latest Stable Kernel Version:** `3.16.2`
 
