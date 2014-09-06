@@ -9,14 +9,14 @@
 # @mail hello@mustafahasturk.com
 # @link https://github.com/muhasturk/ukupgrade
 
-new_kernel_version='3.16.1'
-new_kernel_release='3.16.1-031601-generic'
+new_kernel_version='3.16.2'
+new_kernel_release='3.16.2-031602-generic'
 
-common_headers="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.1-utopic/linux-headers-3.16.1-031601_3.16.1-031601.201408140014_all.deb"
-linux_headers_i386="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.1-utopic/linux-headers-3.16.1-031601-generic_3.16.1-031601.201408140014_i386.deb"
-linux_image_i386="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.1-utopic/linux-image-3.16.1-031601-generic_3.16.1-031601.201408140014_i386.deb"
-linux_headers_amd64="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.1-utopic/linux-headers-3.16.1-031601-generic_3.16.1-031601.201408140014_amd64.deb"
-linux_image_amd64="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.1-utopic/linux-image-3.16.1-031601-generic_3.16.1-031601.201408140014_amd64.deb"
+common_headers="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.2-utopic/linux-headers-3.16.2-031602_3.16.2-031602.201409052035_all.deb"
+linux_headers_i386="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.2-utopic/linux-headers-3.16.2-031602-generic_3.16.2-031602.201409052035_i386.deb"
+linux_image_i386="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.2-utopic/linux-image-3.16.2-031602-generic_3.16.2-031602.201409052035_i386.deb"
+linux_headers_amd64="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.2-utopic/linux-headers-3.16.2-031602-generic_3.16.2-031602.201409052035_amd64.deb"
+linux_image_amd64="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.2-utopic/linux-image-3.16.2-031602-generic_3.16.2-031602.201409052035_amd64.deb"
 
 old_kernel_release=`uname -r`
 kernel_directory="/tmp/new_kernel.d"
