@@ -43,4 +43,4 @@ do-kernel-upgrade
 
 |   homepage	|   [mustafahasturk.com](http://mustafahasturk.com "Official Web Site")   	|
 |:-:	|:-:	|
-|   email	|   hello@mustafahasturk.com	|
+|   email	|   mustafa.hasturk@yandex.com	|
