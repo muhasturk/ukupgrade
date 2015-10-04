@@ -1,86 +1,51 @@
-#!/bin/sh
+#!/bin/bash
 
-# "ukupgrade": ubuntu kernel upgrade script
-# In order to start upgrade proccess give the file executable permission with the following command;
-# chmod +x ./ukupgrade.sh
-# 
-# In order to touch
 # @author Mustafa Hasturk
-# @mail hello@mustafahasturk.com
+# @mail mustafa.hasturk@yandex.com
 # @link https://github.com/muhasturk/ukupgrade
 
-new_kernel_version='3.16.2'
-new_kernel_release='3.16.2-031602-generic'
+cd /tmp
 
-common_headers="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.2-utopic/linux-headers-3.16.2-031602_3.16.2-031602.201409052035_all.deb"
-linux_headers_i386="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.2-utopic/linux-headers-3.16.2-031602-generic_3.16.2-031602.201409052035_i386.deb"
-linux_image_i386="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.2-utopic/linux-image-3.16.2-031602-generic_3.16.2-031602.201409052035_i386.deb"
-linux_headers_amd64="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.2-utopic/linux-headers-3.16.2-031602-generic_3.16.2-031602.201409052035_amd64.deb"
-linux_image_amd64="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.16.2-utopic/linux-image-3.16.2-031602-generic_3.16.2-031602.201409052035_amd64.deb"
+if ! which lynx > /dev/null; then sudo apt-get install lynx -y; fi
 
-old_kernel_release=`uname -r`
-kernel_directory="/tmp/new_kernel.d"
+if [ "$(getconf LONG_BIT)" == "64" ]; then arch=amd64; else arch=i386; fi
 
-lsb_infos="
-`lsb_release -i`
-`lsb_release -d`
-`lsb_release -r`
-`lsb_release -c`
-"
-architecture=`uname -i`
+function download() {
+   wget $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep "$1" | grep "$2" | grep "$arch" | cut -d ' ' -f 4)
+}
 
-echo "provide us root privilege when asked"
-echo "Checking new kernel available..."
-sleep 0.5
+# Kernel URL
+read -p "Do you want the latest RC? (y/n): " rc
+case "$rc" in
+   y* | Y*) kernelURL=$(lynx -dump -nonumbers http://kernel.ubuntu.com/~kernel-ppa/mainline/ | tail -1) ;;
+   n* | N*) kernelURL=$(lynx -dump -nonumbers http://kernel.ubuntu.com/~kernel-ppa/mainline/ | grep -v rc | tail -1) ;;
+   *) exit ;;
+esac
+ 
+read -p "Do you want the lowlatency kernel? (y/n): " lowlatency
+case "$lowlatency" in
+   y* | Y*) lowlatency=1 ;;
+   n* | n*) lowlatency=0 ;;
+   *) exit ;;
+esac
 
-if [ "${old_kernel_release}"  =  "${new_kernel_release}" ]; then
-echo "$old_kernel_release is already latest version.\nExit..."
-exit
+# Download Kernel
+if [ "$lowlatency" == "0" ]; then
+   echo "Downloading the latest generic kernel...\n"
+   download generic header
+   download generic image
+elif [ "$lowlatency" == "1" ]; then
+   echo "Downloading the latest lowlatency kernel...\n"
+   download lowlatency header
+   download lowlatency image
 fi
 
-en_US_string="$(tput setaf 3)* Kernel $new_kernel_version will be installed following system
-$lsb_infos
-Architecture: $architecture
-oldKernel: $old_kernel_release 
-$(tput sgr0)"
+# Shared Kernel Header
+echo "Downloading the shared kernel header...\n"
+wget $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep all | cut -d ' ' -f 4)
 
-echo "$en_US_string"
-sleep 0.5
-
-read -p "Press Enter to continue, or abort by pressing CTRL+C" nothing
-
-if  [ ${architecture} = 'i686' ] || [ ${architecture} = 'i386' ]; then
-echo "i386 process started"
-mkdir -p ${kernel_directory}
-echo "kernel_directory created on ${kernel_directory}\n"
-cd ${kernel_directory}
-
-wget -c ${common_headers}
-wget -c ${linux_headers_i386}
-wget -c ${linux_image_i386}
-echo "download files completed"
-
-sudo dpkg -i *.deb
-
-echo ".deb packages have been installed"t
-
-elif [ ${architecture} = "x86_64" ]; then
-echo "amd64 process started"
-mkdir -p ${kernel_directory}
-echo "kernel_directory created on ${kernel_directory}\n"
-cd ${kernel_directory}
-
-wget -c ${common_headers}
-wget -c ${linux_headers_amd64}
-wget -c ${linux_image_amd64}
-echo "download files completed"
-sudo dpkg -i *.deb
-echo ".deb packages have been installed"
-
-else
-	echo "Unsupported architecture"
-fi
-
-echo "Kernel $new_kernel_version has been installed successfully\n
-We have to reboot system"
+# Install Kernel
+echo "Installing Linux Kernel...\m"
+sudo dpkg -i linux*.deb
+echo "Done. We should reboot the machine."
 sudo reboot
