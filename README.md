@@ -1,3 +1,5 @@
+![Project Status: Active][Project Status Image]
+
 ukupgrade
 =========
 
@@ -44,3 +46,6 @@ do-kernel-upgrade
 |   homepage	|   [mustafahasturk.com](http://mustafahasturk.com "Official Web Site")   	|
 |:-:	|:-:	|
 |   email	|   mustafa.hasturk@yandex.com	|
+
+[Project Status Image]: https://img.shields.io/badge/project-active-green.svg "Project Status: Active"
+
