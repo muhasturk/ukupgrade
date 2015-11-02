@@ -8,7 +8,7 @@ ukupgrade
 **Purpose**: It provides us to upgrade linux kernel to latest stable version for Ubuntu/Mint and derivatives. Based on [this archive](http://kernel.ubuntu.com/~kernel-ppa/mainline/)
 
 
-**Latest Stable Kernel Version:** `4.2.3`
+**Latest Stable Kernel Version:** `4.3`
 
 -----------------------------------------
 
