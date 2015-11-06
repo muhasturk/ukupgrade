@@ -45,7 +45,7 @@ do-kernel-upgrade
 
 |   homepage	|   [mustafahasturk.com](http://mustafahasturk.com "Official Web Site")   	|
 |:-:	|:-:	|
-|   email	|   mustafa.hasturk@yandex.com	|
+|   email	|   hi@mustafahasturk.com	|
 
 [Project Status Image]: https://img.shields.io/badge/project-active-green.svg "Project Status: Active"
 
