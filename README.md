@@ -17,13 +17,10 @@ ukupgrade
 
 ## Usage
 
-* Download latest script [here](https://github.com/muhasturk/ukupgrade/archive/master.zip "ukupgrade-master")
-
-* Extract files
+* Download latest script
 ```
-unzip ukupgrade-master.zip
+curl https://raw.githubusercontent.com/muhasturk/ukupgrade/master/ukupgrade > ukupgrade
 ```
-* `cd ukupgrade-master `
 
 * Call the script
 ```
@@ -31,8 +28,9 @@ unzip ukupgrade-master.zip
 ```
 
 ### In order to call script as bash commannd
+
 * Run 
-```sh
+```
 sudo cp ./ukupgrade /usr/bin/do-kernel-upgrade
 ```
 * Now you can call the script whereever you are
