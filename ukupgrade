@@ -5,7 +5,7 @@
 # @link https://github.com/muhasturk/ukupgrade
 
 echo
-echo "Ubuntu Kernel Upgrade"
+echo "Ubuntu Kernel Upgrade - by Mustafa Hasturk"
 
 if ! which lynx > /dev/null; then sudo apt-get install lynx -y; fi
 
