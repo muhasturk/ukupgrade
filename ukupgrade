@@ -22,14 +22,14 @@ function download() {
 # Kernel URL
 read -p "Do you want the latest ReleaseCandidate [RC]? (y/n): " -n 1 -t 10 -s rc
 case "$rc" in
-   y | Y) echo "$rc - ReleaseCandidate"; kernelURL=$(lynx -dump -nonumbers http://kernel.ubuntu.com/~kernel-ppa/mainline/ | tail -1) ;;
-   *) echo "$rc - StableRelease"; kernelURL=$(lynx -dump -nonumbers http://kernel.ubuntu.com/~kernel-ppa/mainline/ | grep -v rc | tail -1) ;;
+   y | Y) echo "ReleaseCandidate"; kernelURL=$(lynx -dump -nonumbers http://kernel.ubuntu.com/~kernel-ppa/mainline/ | tail -1) ;;
+   *) echo "StableRelease"; kernelURL=$(lynx -dump -nonumbers http://kernel.ubuntu.com/~kernel-ppa/mainline/ | grep -v rc | tail -1) ;;
 esac
 
 read -p "Do you want the lowlatency kernel? (y/n): " -n 1 -t 10 -s km
 case "$km" in
-   y | Y) echo "$km - LowLatency"; kernelmode="lowlatency" ;;
-   *) echo "$km - Generic"; kernelmode="generic" ;;
+   y | Y) echo "LowLatency"; kernelmode="lowlatency" ;;
+   *) echo "Generic"; kernelmode="generic" ;;
 esac
 
 # Download Kernel Header
