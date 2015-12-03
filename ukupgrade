@@ -53,12 +53,11 @@ echo "Installing Linux Kernel..."
 sudo dpkg -i /tmp/linux*.deb
 
 echo
-echo "Done. We should reboot the machine."
-echo "NOTE: LINUX KERNEL 4.0 and post versions support live patching, just not need to reboot"
+echo "Done."
 read -p "Do you want to reboot system now? (y/n): " -n 1 -t 10 -s rs
 case "$rs" in
-   y | Y) echo "YES, REBOOT THIS NOW!!!"; sleep 2; sudo reboot ;;
-   *) echo "NO, STAY THIS WAKE UPED!" ;;
+   n | N) echo "No, stay this wake uped!" ;;
+   *) echo "Yes, reboot this now!"; sleep 2; sudo reboot ;;
 esac
 
 echo
