@@ -11,12 +11,11 @@ if ! which lynx > /dev/null; then sudo apt-get install lynx -y; fi
 
 if [ "$(getconf LONG_BIT)" == "64" ]; then arch=amd64; else arch=i386; fi
 
-if [ $(printf "$(wget --version | head -1 | cut -d' ' -f3)\n1.16" | sort -V | head -1) = 1.16 ]; then _PROGRESS_OPT="-q --show-progress"; else _PROGRESS_OPT=""; fi
+if [ "$(printf "$(wget --version | head -1 | cut -d' ' -f3)\n1.16" | sort -V | head -1)" = 1.16 ]; then _PROGRESS_OPT="-q --show-progress"; else _PROGRESS_OPT=""; fi
 
 function download() {
    wget $_PROGRESS_OPT -P /tmp $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep "$1" | grep "$2" | grep "$arch" | cut -d ' ' -f 4)
-   checkdownload=`echo $?`
-   if [ "$checkdownload" == "1" ]; then echo "Download failed!"; exit; fi
+   if [ "$(echo $?)" == "1" ]; then echo "Download failed!"; exit; fi
 }
 
 # Kernel URL
@@ -46,8 +45,7 @@ download $kernelmode image
 echo
 echo "Downloading the shared kernel header..."
 wget $_PROGRESS_OPT -P /tmp $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep all | cut -d ' ' -f 4)
-checkdownload=`echo $?`
-if [ "$checkdownload" == "1" ]; then echo "Download failed!"; exit; fi
+if [ "$(echo $?)" == "1" ]; then echo "Download failed!"; exit; fi
 
 # Install Kernel
 echo
@@ -63,4 +61,5 @@ case "$rs" in
    *) echo "NO, STAY THIS WAKE UPED!" ;;
 esac
 
+echo
 echo "Thanks for using this script!!!"
