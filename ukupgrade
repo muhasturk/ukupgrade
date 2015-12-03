@@ -5,7 +5,7 @@
 # @link https://github.com/muhasturk/ukupgrade
 
 echo
-echo "Ubuntu Kernel Upgrade"
+echo "Ubuntu Kernel Upgrade - by Mustafa Hasturk"
 
 cd /tmp
 
@@ -13,8 +13,10 @@ if ! which lynx > /dev/null; then sudo apt-get install lynx -y; fi
 
 if [ "$(getconf LONG_BIT)" == "64" ]; then arch=amd64; else arch=i386; fi
 
+if [ $(printf "$(wget --version | head -1 | cut -d' ' -f3)\n1.16" | sort -V | head -1) = 1.16 ]; then _PROGRESS_OPT="-q --show-progress"; else _PROGRESS_OPT=""; fi
+
 function download() {
-   wget $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep "$1" | grep "$2" | grep "$arch" | cut -d ' ' -f 4)
+   wget $_PROGRESS_OPT $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep "$1" | grep "$2" | grep "$arch" | cut -d ' ' -f 4)
    checkdownload=`echo $?`
    if [ "$checkdownload" == "1" ]; then echo "Download failed!"; exit; fi
 }
@@ -34,21 +36,36 @@ case "$km" in
    *) exit ;;
 esac
 
-# Download Kernel
+# Download Kernel Header
+echo
 echo "Downloading the latest $kernelmode kernel header..."
 download $km header
+
+# Download Kernel Image
+echo
 echo "Downloading the latest $kernelmode kernel image..."
 download $km image
 
-# Shared Kernel Header
+# Download Shared Kernel Header
+echo
 echo "Downloading the shared kernel header..."
-wget $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep all | cut -d ' ' -f 4)
+wget $_PROGRESS_OPT $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep all | cut -d ' ' -f 4)
 checkdownload=`echo $?`
 if [ "$checkdownload" == "1" ]; then echo "Download failed!"; exit; fi
 
 # Install Kernel
+echo
 echo "Installing Linux Kernel..."
 sudo dpkg -i linux*.deb
 
+echo
 echo "Done. We should reboot the machine."
-sudo reboot
+echo "NOTE: LINUX KERNEL 4.0 and post versions support live patching, just not need to reboot"
+read -p "Do you want to reboot system now? (y/n): " -n 1 -t 10 -s rs
+case "$rs" in
+   y | Y) echo "YES, REBOOT THIS NOW!!!"; sleep 2; sudo reboot ;;
+   n | n) echo "NO, STAY THIS WAKE UPED!" ;;
+   *) echo "NO, STAY THIS WAKE UPED!" ;;
+esac
+
+echo "Thanks for using this script!!!"
