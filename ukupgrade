@@ -35,12 +35,12 @@ esac
 # Download Kernel Header
 echo
 echo "Downloading the latest $kernelmode kernel header..."
-download $km header
+download $kernelmode header
 
 # Download Kernel Image
 echo
 echo "Downloading the latest $kernelmode kernel image..."
-download $km image
+download $kernelmode image
 
 # Download Shared Kernel Header
 echo
