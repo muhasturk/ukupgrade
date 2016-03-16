@@ -10,7 +10,7 @@ ukupgrade
 **Purpose**: It provides us to upgrade linux kernel to latest stable version for Ubuntu/Mint and derivatives. Based on [this archive](http://kernel.ubuntu.com/~kernel-ppa/mainline/)
 
 
-**Latest Stable Kernel Version:** `4.4.1`
+**Latest Stable Kernel Version:** **4.5**
 
 -----------------------------------------
 
@@ -43,7 +43,7 @@ do-kernel-upgrade
 
 |   homepage	|   [mustafahasturk.com](http://mustafahasturk.com "Official Web Site")   	|
 |:-:	|:-:	|
-|   email	|   hi@mustafahasturk.com	|
+|   email	|   hi [at] mustafahasturk [dot] com	|
 
 [Project Status Image]: https://img.shields.io/badge/project-active-green.svg "Project Status: Active"
 
