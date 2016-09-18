@@ -7,10 +7,10 @@ ukupgrade
 
 **ukupgrade** stands for "*Ubuntu Kernel Upgrade*"   
 
-**Purpose**: It provides us to upgrade linux kernel to latest stable version for Ubuntu/Mint and derivatives. Based on [this archive](http://kernel.ubuntu.com/~kernel-ppa/mainline/)
+**Purpose**: It provides us to upgrade linux kernel to latest version for Ubuntu/Mint and derivatives. Based on [this archive](http://kernel.ubuntu.com/~kernel-ppa/mainline/)
 
 
-**Latest Stable Kernel Version:** **4.6**
+**Latest Stable Kernel Version on 2016-Sep:** **4.7**
 
 -----------------------------------------
 
@@ -49,6 +49,12 @@ do-kernel-upgrade
 |   homepage	|   [mustafahasturk.com](http://mustafahasturk.com "Official Web Site")   	|
 |:-:	|:-:	|
 |   email	|  `hi [at] mustafahasturk [dot] com`	|
+
+### Contributors
+[Allan Brazute](https://www.linkedin.com/in/allan-brazute-59b378b5)   
+
+|:-:	|:-:	|
+|   email	|  `ethraza [at] gmail [dot] com`	|
 
 [Project Status Image]: https://img.shields.io/badge/project-active-green.svg "Project Status: Active"
 
