@@ -53,7 +53,6 @@ do-kernel-upgrade
 ### Contributors
 [Allan Brazute](https://www.linkedin.com/in/allan-brazute-59b378b5)   
 
-|:-:	|:-:	|
 |   email	|  `ethraza [at] gmail [dot] com`	|
 
 [Project Status Image]: https://img.shields.io/badge/project-active-green.svg "Project Status: Active"
