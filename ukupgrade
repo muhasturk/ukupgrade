@@ -27,11 +27,13 @@ function download() {
 # Kernel URL
 echo "Fetching latest versions information..."
 ltv=$(lynx -dump -nonumbers $kernelMirror | grep -v rc | tail -1 | cut -d "/" -f6)
+ltvd=$(lynx -dump -nonumbers $kernelMirror$ltv | grep $arch | tail -1 | cut -d "_" -f2)
 rcv=$(lynx -dump -nonumbers $kernelMirror | tail -1 | cut -d "/" -f6)
+rcvd=$(lynx -dump -nonumbers $kernelMirror$rcv | grep $arch | tail -1 | cut -d "_" -f2)
 echo "************************************"
-echo "* Stable: $ltv"
-echo "* RC: $rcv"
-echo "* Using: $(uname -r)"
+echo "* Stable: $ltvd"
+echo "* RC: $rcvd"
+echo "* Using: $(uname -rv | cut -d" " -f1,2)"
 echo "************************************"
 echo
 read -p "Do you want the latest Release Candidate (RC) kernel? (y/n): " -n 1 -s rc
