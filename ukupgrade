@@ -50,5 +50,4 @@ if [ "$checkdownload" == "1" ]; then echo "Download failed!"; exit; fi
 echo "Installing Linux Kernel..."
 sudo dpkg -i linux*.deb
 
-echo "Done. We should reboot the machine."
-sudo reboot
+echo "Done. You must reboot the machine to apply the changes."
