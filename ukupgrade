@@ -65,6 +65,9 @@ echo
 echo "Downloading the latest $kernelVersion $kernelMode kernel header..."
 download $kernelMode header
 echo
+echo "Downloading the latest $kernelVersion $kernelMode kernel modules..."
+download $kernelMode modules
+echo
 echo "Downloading the shared $kernelVersion $kernelMode kernel header..."
 wget $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep all | cut -d ' ' -f 4 | uniq)
 checkdownload=`echo $?`
