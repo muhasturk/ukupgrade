@@ -3,9 +3,14 @@
 # @author Mustafa Hasturk
 # @mail hi [at] mustafahasturk [dot] com
 # @link https://github.com/muhasturk/ukupgrade
+#
+# v2.0: Allan Brazute - ethraza [at] gmail [dot] com
+
+kernelMirror="http://kernel.ubuntu.com/~kernel-ppa/mainline/"
 
 echo
 echo "Ubuntu Kernel Upgrade"
+echo
 
 cd /tmp
 
@@ -16,39 +21,68 @@ if [ "$(getconf LONG_BIT)" == "64" ]; then arch=amd64; else arch=i386; fi
 function download() {
    wget $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep "$1" | grep "$2" | grep "$arch" | cut -d ' ' -f 4)
    checkdownload=`echo $?`
-   if [ "$checkdownload" == "1" ]; then echo "Download failed!"; exit; fi
+   if [ "$checkdownload" == "1" ]; then echo "Download failed!"; rm -f linux*.deb; exit; fi
 }
 
 # Kernel URL
-read -p "Do you want the latest ReleaseCandidate [RC]? (y/n): " -n 1 -s rc
+echo "Fetching latest versions information..."
+ltv=$(lynx -dump -nonumbers $kernelMirror | grep -v rc | tail -1 | cut -d "/" -f6)
+ltvd=$(lynx -dump -nonumbers $kernelMirror$ltv | grep $arch | tail -1 | cut -d "_" -f2)
+rcv=$(lynx -dump -nonumbers $kernelMirror | tail -1 | cut -d "/" -f6)
+rcvd=$(lynx -dump -nonumbers $kernelMirror$rcv | grep $arch | tail -1 | cut -d "_" -f2)
+echo "************************************"
+echo "* Stable: $ltvd"
+echo "* RC: $rcvd"
+echo "* Using: $(uname -rv | cut -d" " -f1,2)"
+echo "************************************"
+echo
+read -p "Do you want the latest Release Candidate (RC) kernel? (y/n): " -n 1 -s rc
 case "$rc" in
-   y | Y) echo "$rc - ReleaseCandidate"; kernelURL=$(lynx -dump -nonumbers http://kernel.ubuntu.com/~kernel-ppa/mainline/ | tail -1) ;;
-   n | N) echo "$rc - Non ReleaseCandidate"; kernelURL=$(lynx -dump -nonumbers http://kernel.ubuntu.com/~kernel-ppa/mainline/ | grep -v rc | tail -1) ;;
-   *) exit ;;
+   y | Y) echo "$rc - Release Candidate"; kernelVersion="$rcv" ;;
+   n | N) echo "$rc - Stable"; kernelVersion=$ltv ;;
+   *) echo "Leaving..."; exit ;;
+esac
+kernelURL="$kernelMirror$kernelVersion"
+
+read -p "Do you want the Low Latency kernel? (y/n): " -n 1 -s km
+case "$km" in
+   y | Y) echo "$km - Low Latency"; kernelMode="lowlatency" ;;
+   n | n) echo "$km - Generic"; kernelMode="generic" ;;
+   *) echo "Leaving..."; exit ;;
 esac
 
-read -p "Do you want the lowlatency kernel? (y/n): " -n 1 -s km
+read -p "Ready to download and install kernel $kernelVersion $kernelMode? (y/n): " -n 1 -s km
 case "$km" in
-   y | Y) echo "$km - LowLatency"; kernelmode="lowlatency" ;;
-   n | n) echo "$km - Generic"; kernelmode="generic" ;;
-   *) exit ;;
+   y | Y) echo "Go Go Go..." ;;
+   *) echo "Leaving..."; exit ;;
 esac
 
 # Download Kernel
-echo "Downloading the latest $kernelmode kernel header..."
-download $km header
-echo "Downloading the latest $kernelmode kernel image..."
-download $km image
-
-# Shared Kernel Header
-echo "Downloading the shared kernel header..."
-wget $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep all | cut -d ' ' -f 4)
+echo
+echo "Downloading the latest $kernelVersion $kernelMode kernel image..."
+download $kernelMode image
+echo
+echo "Downloading the latest $kernelVersion $kernelMode kernel header..."
+download $kernelMode header
+echo
+echo "Downloading the latest $kernelVersion $kernelMode kernel modules..."
+download $kernelMode modules
+echo
+echo "Downloading the shared $kernelVersion $kernelMode kernel header..."
+wget $(lynx -dump -listonly -dont-wrap-pre $kernelURL | grep all | cut -d ' ' -f 4 | uniq)
 checkdownload=`echo $?`
-if [ "$checkdownload" == "1" ]; then echo "Download failed!"; exit; fi
+if [ "$checkdownload" == "1" ]; then echo "Download failed!"; rm -f linux*.deb; exit; fi
 
 # Install Kernel
+echo
 echo "Installing Linux Kernel..."
 sudo dpkg -i linux*.deb
 
-echo "Done. We should reboot the machine."
-sudo reboot
+echo
+read -p "Done. Should we reboot the machine now? (y/n): " -n 1 -s rb
+case "$rb" in
+   y | Y) echo "$rb - Rebooting"; rm -f linux*.deb; sudo reboot ;;
+   *) echo "$rb - Do not forget to reboot to start using the latest kernel" ;;
+esac
+
+rm -f linux*.deb
