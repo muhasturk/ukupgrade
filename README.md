@@ -2,10 +2,13 @@ ukupgrade
 =========
 
 <img align="right" src="https://www.kernel.org/theme/images/logos/tux.png" alt="Linux Logo" title="Tux">
+<a href="https://github.com/muhasturk/ukupgrade/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green"></a>
 
-**ukupgrade** stands for "*Ubuntu Kernel Upgrade*"   
+Stands for "*Ubuntu Kernel Upgrade*"   
 
-**Purpose**: It provides us to upgrade linux kernel to latest version for Ubuntu/Mint and derivatives. Based on [this archive](http://kernel.ubuntu.com/~kernel-ppa/mainline/)
+## Why?
+It provides us to upgrade linux kernel to latest version for Ubuntu/Mint and derivatives. Based on [this archive](http://kernel.ubuntu.com/~kernel-ppa/mainline/)
+
 -----------------------------------------
 
 ## 😳 Help Wanted!
@@ -28,7 +31,7 @@ chmod +x ./ukupgrade
 ./ukupgrade
 ```
 
-### In order to call script as bash commannd
+#### Shell Commannd
 
 * Run 
 ```
