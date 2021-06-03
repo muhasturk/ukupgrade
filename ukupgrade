@@ -6,7 +6,7 @@
 #
 # v2.0: Allan Brazute - ethraza [at] gmail [dot] com
 
-kernelMirror="http://kernel.ubuntu.com/~kernel-ppa/mainline/"
+kernelMirror="https://kernel.ubuntu.com/~kernel-ppa/mainline/"
 
 echo
 echo "Ubuntu Kernel Upgrade"
