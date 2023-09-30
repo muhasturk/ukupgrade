@@ -44,13 +44,7 @@ do-kernel-upgrade
 
 ## 👨🏻‍💻 Author
 [Mustafa Hasturk](https://www.linkedin.com/in/muhasturk)   
-
-Email encrypted with AES. You can decrypt it by given info.
-
-Base64 Hashed Encryption Key:  
-`RHNQm+V5SiVGRI6TpcK0B+olfumxXS318JKslq9VzsY=`
-
-Encrypted Hexadecimal String Representation of Email: `d8a17f7d4d2a3ca31326a8b57bd795e8416e70390e083c7745f6b4dcaf86308c4ad16506e314c98928d19e78f2d6bcfa1f5f`
+mustafa[at]hasturk.dev
 
 ## ❤️ Contributing
 Bug reports and pull requests are welcome.
